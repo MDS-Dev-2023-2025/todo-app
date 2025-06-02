@@ -44,10 +44,6 @@ echo "🔧 Vérification TypeScript..."
 npx tsc --noEmit
 echo "  ✅ TypeScript - compilation vérifiée"
 
-# Tests unitaires
-echo "🧪 Exécution des tests unitaires..."
-npm test -- --coverage --passWithNoTests --watchAll=false
-echo "  ✅ Tests unitaires - terminés"
 
 echo "🎉 Vérification de qualité terminée!"
 

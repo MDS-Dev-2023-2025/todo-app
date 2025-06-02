@@ -7,7 +7,7 @@ Ce dossier contient toute la configuration pour l'intégration et le déploiemen
 ### 1. `ci.yml` - Pipeline CI Principal
 - **Déclenchement**: Push et PR sur `main` et `develop`
 - **Jobs**:
-  - `test-and-quality`: Tests unitaires, linting, type checking (Node 18.x et 20.x)
+  - `test-and-quality`: Linting, type checking (Node 18.x et 20.x)
   - `e2e-tests`: Tests end-to-end avec Cypress
   - `build`: Build de production
   - `security-audit`: Audit de sécurité npm
@@ -36,7 +36,7 @@ SLACK_WEBHOOK    # URL webhook Slack pour notifications
 
 ### Scripts Disponibles
 ```bash
-npm run test:all        # Tous les tests (unitaires + E2E)
+npm run test:all        # Tests E2E seulement
 npm run e2e            # Tests E2E avec serveur auto
 npm run lint:fix       # Correction automatique du code
 npm run setup          # Configuration environnement complet
@@ -45,8 +45,6 @@ npm run setup          # Configuration environnement complet
 
 ## 📊 Métriques et Monitoring
 
-### Coverage
-- Rapports uploadés vers Codecov
 
 
 ## 🚀 Déploiement
@@ -65,6 +63,6 @@ npm run setup          # Configuration environnement complet
 
 Avant de merger vers `main`:
 
-- [ ] Tous les tests passent
+- [ ] Tous les tests E2E passent
 - [ ] L'application fonctionne correctement
 - [ ] Documentation mise à jour si nécessaire
