@@ -7,8 +7,8 @@ on:
     branches: [ main, develop, features/devops ]
 
 permissions:
-  actions: write    # Pour déclencher d'autres workflows
-  contents: read    # Pour checkout du code
+  actions: read
+  contents: read
 
 jobs:
   # Job pour les tests et la qualité du code
@@ -118,4 +118,46 @@ jobs:
         name: build-files
         path: frontend/build
         retention-days: 7
+
+  # Job pour le déploiement en production
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [test-and-quality, e2e-tests, build]
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/features/devops'
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Install dependencies
+      working-directory: ./frontend
+      run: npm ci
+
+    - name: Build application
+      working-directory: ./frontend
+      run: npm run build
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+
+    - name: Upload to GitHub Pages
+      uses: actions/upload-pages-artifact@v4
+      with:
+        path: frontend/build
+
+    - name: Deploy to GitHub Pages
+      id: deploy
+      uses: actions/deploy-pages@v4
 
