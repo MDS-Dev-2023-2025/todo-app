@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">94.11% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>16/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>14/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -98,84 +98,87 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Todo } from '../models/todo.model';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Todo } from "../models/todo.model";
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export class T</span></span>odoService {
-  private <span class="cstat-no" title="statement not covered" >todos: Todo[] = [];</span>
+export class TodoService {
+  private todos: Todo[] = [];
 &nbsp;
-<span class="fstat-no" title="function not covered" >  async </span>getAllTodos(): Promise&lt;Todo[]&gt; {
-<span class="cstat-no" title="statement not covered" >    return this.todos;</span>
+  async getAllTodos(): Promise&lt;Todo[]&gt; {
+    return this.todos;
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  async </span>createTodo(todoData: Omit&lt;Todo, 'id'&gt;): Promise&lt;Todo&gt; {
-    const newTodo: Todo = <span class="cstat-no" title="statement not covered" >{</span>
+  async createTodo(todoData: Pick&lt;Todo, "title"&gt;): Promise&lt;Todo&gt; {
+    const newTodo: Todo = {
       id: Date.now().toString(),
       ...todoData,
       completed: false
     };
-<span class="cstat-no" title="statement not covered" >    this.todos.push(newTodo);</span>
-<span class="cstat-no" title="statement not covered" >    return newTodo;</span>
+    this.todos.push(newTodo);
+    return newTodo;
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  async </span>updateTodo(id: string, todoData: Partial&lt;Todo&gt;): Promise&lt;Todo&gt; {
-    const todoIndex = <span class="cstat-no" title="statement not covered" >this.todos.findIndex(<span class="fstat-no" title="function not covered" >todo </span>=&gt; <span class="cstat-no" title="statement not covered" >todo.id === id)</span>;</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (todoIndex === -1) {</span>
-<span class="cstat-no" title="statement not covered" >      throw new Error('Todo not found');</span>
+  async updateTodo(id: string, todoData: Partial&lt;Todo&gt;): Promise&lt;Todo&gt; {
+    const todoIndex = this.todos.findIndex((todo) =&gt; todo.id === id);
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (todoIndex === -1) {
+<span class="cstat-no" title="statement not covered" >      throw new Error("Todo not found");</span>
     }
-<span class="cstat-no" title="statement not covered" >    this.todos[todoIndex] = { ...this.todos[todoIndex], ...todoData };</span>
-<span class="cstat-no" title="statement not covered" >    return this.todos[todoIndex];</span>
+    this.todos[todoIndex] = { ...this.todos[todoIndex], ...todoData };
+    return this.todos[todoIndex];
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  async </span>deleteTodo(id: string): Promise&lt;void&gt; {
-    const todoIndex = <span class="cstat-no" title="statement not covered" >this.todos.findIndex(<span class="fstat-no" title="function not covered" >todo </span>=&gt; <span class="cstat-no" title="statement not covered" >todo.id === id)</span>;</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (todoIndex === -1) {</span>
-<span class="cstat-no" title="statement not covered" >      throw new Error('Todo not found');</span>
+  async deleteTodo(id: string): Promise&lt;void&gt; {
+    const todoIndex = this.todos.findIndex((todo) =&gt; todo.id === id);
+    if (todoIndex === -1) {
+      throw new Error("Todo not found");
     }
-<span class="cstat-no" title="statement not covered" >    this.todos.splice(todoIndex, 1);</span>
+    this.todos.splice(todoIndex, 1);
   }
-} </pre></td></tr></table></pre>
+}
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-06-02T12:05:37.530Z
+                at 2025-06-02T12:11:01.078Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

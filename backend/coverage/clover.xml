@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1748865937540" clover="3.2.0">
-  <project timestamp="1748865937540" name="All files">
-    <metrics statements="59" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="13" coveredmethods="0" elements="76" coveredelements="0" complexity="0" loc="59" ncloc="59" packages="4" files="4" classes="4"/>
+<coverage generated="1748866261088" clover="3.2.0">
+  <project timestamp="1748866261088" name="All files">
+    <metrics statements="59" coveredstatements="14" conditionals="4" coveredconditionals="1" methods="13" coveredmethods="7" elements="76" coveredelements="22" complexity="0" loc="59" ncloc="59" packages="4" files="4" classes="4"/>
     <package name="src">
       <metrics statements="12" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="server.ts" path="/Users/leoteixeira/Documents/ecole/qualite-test/todo-app/backend/src/server.ts">
+      <file name="app.ts" path="/Users/leoteixeira/Documents/ecole/qualite-test/todo-app/backend/src/app.ts">
         <metrics statements="12" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -65,24 +65,24 @@
       </file>
     </package>
     <package name="src.services">
-      <metrics statements="15" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="7" coveredmethods="0"/>
+      <metrics statements="15" coveredstatements="14" conditionals="2" coveredconditionals="1" methods="7" coveredmethods="7"/>
       <file name="todo.service.ts" path="/Users/leoteixeira/Documents/ecole/qualite-test/todo-app/backend/src/services/todo.service.ts">
-        <metrics statements="15" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="7" coveredmethods="0"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="cond" truecount="0" falsecount="1"/>
+        <metrics statements="15" coveredstatements="14" conditionals="2" coveredconditionals="1" methods="7" coveredmethods="7"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="cond" truecount="0" falsecount="1"/>
         <line num="23" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="31" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
       </file>
     </package>
   </project>
