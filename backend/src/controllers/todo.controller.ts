@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import { TodoService } from '../services/todo.service';
+import { Request, Response } from "express";
+import { TodoService } from "../services/todo.service";
 
 export class TodoController {
   private todoService: TodoService;
@@ -13,7 +13,7 @@ export class TodoController {
       const todos = await this.todoService.getAllTodos();
       res.json(todos);
     } catch (error) {
-      res.status(500).json({ message: 'Error fetching todos' });
+      res.status(500).json({ message: "Error fetching todos" });
     }
   };
 
@@ -22,7 +22,7 @@ export class TodoController {
       const todo = await this.todoService.createTodo(req.body);
       res.status(201).json(todo);
     } catch (error) {
-      res.status(400).json({ message: 'Error creating todo' });
+      res.status(400).json({ message: "Error creating todo" });
     }
   };
 
@@ -31,7 +31,7 @@ export class TodoController {
       const todo = await this.todoService.updateTodo(req.params.id, req.body);
       res.json(todo);
     } catch (error) {
-      res.status(400).json({ message: 'Error updating todo' });
+      res.status(400).json({ message: "Error updating todo" });
     }
   };
 
@@ -40,7 +40,7 @@ export class TodoController {
       await this.todoService.deleteTodo(req.params.id);
       res.status(204).send();
     } catch (error) {
-      res.status(400).json({ message: 'Error deleting todo' });
+      res.status(400).json({ message: "Error deleting todo" });
     }
   };
 } 
