@@ -1,4 +1,4 @@
-import { Todo } from '../models/todo.model';
+import { Todo } from "../models/todo.model";
 
 export class TodoService {
   private todos: Todo[] = [];
@@ -7,7 +7,7 @@ export class TodoService {
     return this.todos;
   }
 
-  async createTodo(todoData: Omit<Todo, 'id'>): Promise<Todo> {
+  async createTodo(todoData: Pick<Todo, "title">): Promise<Todo> {
     const newTodo: Todo = {
       id: Date.now().toString(),
       ...todoData,
@@ -18,19 +18,19 @@ export class TodoService {
   }
 
   async updateTodo(id: string, todoData: Partial<Todo>): Promise<Todo> {
-    const todoIndex = this.todos.findIndex(todo => todo.id === id);
+    const todoIndex = this.todos.findIndex((todo) => todo.id === id);
     if (todoIndex === -1) {
-      throw new Error('Todo not found');
+      throw new Error("Todo not found");
     }
     this.todos[todoIndex] = { ...this.todos[todoIndex], ...todoData };
     return this.todos[todoIndex];
   }
 
   async deleteTodo(id: string): Promise<void> {
-    const todoIndex = this.todos.findIndex(todo => todo.id === id);
+    const todoIndex = this.todos.findIndex((todo) => todo.id === id);
     if (todoIndex === -1) {
-      throw new Error('Todo not found');
+      throw new Error("Todo not found");
     }
     this.todos.splice(todoIndex, 1);
   }
-} 
+}
