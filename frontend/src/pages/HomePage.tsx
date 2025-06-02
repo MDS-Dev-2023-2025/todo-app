@@ -15,6 +15,15 @@ const HomePage = () => {
     const newId = (todos.length + 1).toString();
     const newTodo = new RawTodoItem(newId, title, description);
     setTodos([...todos, newTodo]);
+    fetch(`${process.env.REACT_APP_REQUEST_BASE}/`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json;charset=UTF-8",
+      },
+      body: JSON.stringify({
+        title: title,
+      }),
+    });
   };
 
   return (
