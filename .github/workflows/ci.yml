@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main, develop, features/devops ]
 
+permissions:
+  actions: write    # Pour déclencher d'autres workflows
+  contents: read    # Pour checkout du code
+
 jobs:
   # Job pour les tests et la qualité du code
   test-and-quality:
