@@ -16,20 +16,8 @@ Ce dossier contient toute la configuration pour l'intégration et le déploiemen
 - **Déclenchement**: Push sur `main` après succès du CI
 - **Jobs**:
   - `deploy`: Déploiement sur GitHub Pages
-  - `deploy-server`: Déploiement sur serveur (optionnel)
 
 
-## 🔑 Secrets Optionnels
-
-Pour le déploiement sur serveur custom, configurez ces secrets dans GitHub:
-
-```
-DEPLOY_HOST      # Adresse IP ou nom de domaine du serveur
-DEPLOY_USER      # Nom d'utilisateur SSH
-DEPLOY_KEY       # Clé privée SSH (format PEM)
-DEPLOY_PORT      # Port SSH (optionnel, défaut: 22)
-SLACK_WEBHOOK    # URL webhook Slack pour notifications
-```
 
 ## 🛠️ Configuration Locale
 
@@ -53,11 +41,6 @@ npm run setup          # Configuration environnement complet
 1. Push sur `main`
 2. CI passe avec succès
 3. Déploiement automatique sur GitHub Pages
-
-### Serveur Custom (Optionnel)
-1. Configurer les secrets SSH
-2. Le workflow `deploy.yml` se charge du déploiement
-3. Notifications Slack automatiques
 
 ## 📋 Checklist Déploiement
 

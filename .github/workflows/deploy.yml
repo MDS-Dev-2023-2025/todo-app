@@ -1,8 +1,6 @@
 name: Deploy to Production
 
 on:
-  push:
-    branches: [ main, features/devops ]
   workflow_run:
     workflows: ["CI Pipeline"]
     types:
@@ -12,7 +10,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'push' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
 
     permissions:
@@ -51,53 +49,3 @@ jobs:
       id: deploy
       uses: actions/deploy-pages@v4
 
-  # Déploiement vers un serveur (optionnel)
-  deploy-server:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'push' }}
-    needs: deploy
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20.x'
-        cache: 'npm'
-        cache-dependency-path: frontend/package-lock.json
-
-    - name: Install dependencies
-      working-directory: ./frontend
-      run: npm ci
-
-    - name: Build application
-      working-directory: ./frontend
-      run: npm run build
-
-    - name: Deploy to server via SSH
-      if: ${{ secrets.DEPLOY_HOST && secrets.DEPLOY_USER && secrets.DEPLOY_KEY }}
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.DEPLOY_HOST }}
-        username: ${{ secrets.DEPLOY_USER }}
-        key: ${{ secrets.DEPLOY_KEY }}
-        port: ${{ secrets.DEPLOY_PORT || 22 }}
-        script: |
-          cd /var/www/todo-app
-          git pull origin main
-          cd frontend
-          npm ci
-          npm run build
-          sudo systemctl reload nginx
-
-    - name: Notify deployment status
-      if: always()
-      uses: 8398a7/action-slack@v3
-      with:
-        status: ${{ job.status }}
-        webhook_url: ${{ secrets.SLACK_WEBHOOK }}
-        text: "🚀 Déploiement terminé avec le statut: ${{ job.status }}"
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
