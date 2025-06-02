@@ -28,6 +28,7 @@ const TodoForm = ({ onAddTodo }: Props) => {
           </label>
           <input
             id="todo-title"
+            data-cy="todo-title-input"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -43,6 +44,7 @@ const TodoForm = ({ onAddTodo }: Props) => {
           </label>
           <textarea
             id="todo-description"
+            data-cy="todo-description-input"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Ajoutez une description (optionnel)..."
@@ -53,6 +55,7 @@ const TodoForm = ({ onAddTodo }: Props) => {
 
         <button
           type="submit"
+          data-cy="submit-todo-button"
           className={styles.submitButton}
           disabled={!title.trim()}
         >

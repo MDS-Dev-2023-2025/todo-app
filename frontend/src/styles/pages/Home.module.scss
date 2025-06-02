@@ -30,3 +30,41 @@
     margin-bottom: 1.5rem;
   }
 }
+
+.filterContainer {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+
+  button {
+    padding: 0.5rem 1rem;
+    border: 2px solid #e5e7eb;
+    background-color: white;
+    color: #6b7280;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: #6366f1;
+      color: #6366f1;
+    }
+
+    &.activeFilter {
+      background-color: #6366f1;
+      border-color: #6366f1;
+      color: white;
+    }
+  }
+
+  @media (max-width: 768px) {
+    gap: 0.25rem;
+    
+    button {
+      padding: 0.4rem 0.8rem;
+      font-size: 14px;
+    }
+  }
+}
