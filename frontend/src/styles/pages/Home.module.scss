@@ -4,14 +4,18 @@
   padding: 2rem;
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  
+
   @media (max-width: 768px) {
     padding: 1rem;
   }
 }
 
 .title {
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
   font-size: 2.5rem;
   font-weight: 700;
   text-align: center;
@@ -20,7 +24,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  
+
   @media (max-width: 768px) {
     font-size: 2rem;
     margin-bottom: 1.5rem;

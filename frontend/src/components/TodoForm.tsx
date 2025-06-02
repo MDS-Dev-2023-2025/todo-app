@@ -36,7 +36,7 @@ const TodoForm = ({ onAddTodo }: Props) => {
             required
           />
         </div>
-        
+
         <div className={styles.inputGroup}>
           <label htmlFor="todo-description" className={styles.label}>
             Description
@@ -50,9 +50,9 @@ const TodoForm = ({ onAddTodo }: Props) => {
             rows={3}
           />
         </div>
-        
-        <button 
-          type="submit" 
+
+        <button
+          type="submit"
           className={styles.submitButton}
           disabled={!title.trim()}
         >
