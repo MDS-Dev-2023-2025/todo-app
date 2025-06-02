@@ -33,7 +33,7 @@ describe("Todo Routes", () => {
   });
 
   it("DELETE /todos/:id - todo inexistant", async () => {
-    const response = await request(app).delete(`/todos/123`);
+    const response = await request(app).delete("/todos/123");
     expect(response.statusCode).toBe(400);
   });
 });
