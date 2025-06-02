@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/todo-app">
       <Routes>
         <Route path="/" element={<HomePage />} />
       </Routes>
