@@ -1,8 +1,15 @@
 export { };
 module.exports = {
     collectCoverage: true,
-    collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts',
-        '!**/vendor/**'],
+    collectCoverageFrom: [
+        'src/**/*.{ts,tsx}',
+        '!src/**/*.d.ts',
+        '!src/index.tsx',
+        '!src/index.ts',
+        '!src/reportWebVitals.ts',
+        '!src/App.tsx',
+        '!**/vendor/**'
+    ],
     coverageDirectory: 'coverage',
     testEnvironment: 'jsdom',
     transform: {
@@ -16,9 +23,10 @@ module.exports = {
         "package-lock.json",
         "reportWebVitals.ts",
         "setupTests.ts",
-        "index.tsx"
+        "index.tsx",
+        "App.tsx"
     ],
-    setupFilesAfterEnv: ['jest.setup.ts'],
+    setupFilesAfterEnv: ['jest.setup.js'],
 
     moduleDirectories: ["node_modules", "src", "<rootDir>"],
 
@@ -27,5 +35,4 @@ module.exports = {
             tsconfig: 'tsconfig.json',
         },
     },
-
 };

@@ -1,65 +1,221 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import HomePage from "../pages/HomePage";
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import HomePage from '../pages/HomePage';
+import { act } from 'react-dom/test-utils';
 
-// Mock du modèle RawTodoItem
-// Pour éviter les dépendances externes, nous mockons le modèle RawTodoItem
-// Le mock permet de simuler le comportement du modèle sans avoir besoin de la base de données ou d'une API réelle
-jest.mock("../models/RawTodoItem", () => {
-  return function MockedRawTodoItem(id: string, title: string) {
-    return { id, title};
-  };
-});
-
-// Mock global de fetch
-// Nous mockons la fonction fetch pour simuler les appels API
-// Cela permet de tester les interactions avec l'API sans effectuer de requêtes réelles
+// Mock fetch
 global.fetch = jest.fn();
 
-// deux tests unitaires pour la page HomePage
-// 1. Vérifier que les todos initiaux sont affichés
-// 2. Vérifier que l'ajout d'un todo envoie une requête API et met à jour l'affichage
-describe("HomePage test", () => {
+describe('HomePage', () => {
   beforeEach(() => {
-    (fetch as jest.Mock).mockClear();
+    jest.clearAllMocks();
+    process.env.REACT_APP_REQUEST_BASE = 'http://localhost:3000';
   });
 
-  test("ajoute un todo et envoie une requête API", async () => {
-    (fetch as jest.Mock)
-      .mockResolvedValueOnce({
+  it('renders the title and form', () => {
+    render(<HomePage />);
+    expect(screen.getByText('Todo App')).toBeInTheDocument();
+    expect(screen.getByText('Ajouter une nouvelle tâche')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Entrez le titre de la tâche...')).toBeInTheDocument();
+  });
+
+  it('loads todos on initial render', async () => {
+    const mockTodos = [
+      { id: '1', title: 'Test Todo 1' },
+      { id: '2', title: 'Test Todo 2' }
+    ];
+
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
       ok: true,
-      json: async () => [],
-      status: 204,
-      })
-      .mockResolvedValueOnce({ ok: false });
-    
-    // Importer la function addTodoFrontSide de HomePage
+      json: async () => mockTodos
+    });
+
+    await act(async () => {
+      render(<HomePage />);
+    });
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        'http://localhost:3000/',
+        expect.objectContaining({
+          method: 'GET',
+          headers: expect.any(Object)
+        })
+      );
+    });
+
+    // Should render the todos
+    expect(screen.getByText('Test Todo 1')).toBeInTheDocument();
+    expect(screen.getByText('Test Todo 2')).toBeInTheDocument();
+  });
+
+  it('handles add todo', async () => {
+    // First call: GET todos (empty)
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: true,
+      json: async () => []
+    });
+    // Second call: POST new todo
+    (global.fetch as jest.Mock).mockResolvedValueOnce({ ok: true });
 
     render(<HomePage />);
 
-    // Remplir les champs
-    fireEvent.change(screen.getByPlaceholderText(/titre/i), {
-      target: { value: "Nouvelle tâche" },
+    const input = screen.getByPlaceholderText('Entrez le titre de la tâche...');
+    const addButton = screen.getByRole('button', { name: /ajouter la tâche/i });
+
+    fireEvent.change(input, { target: { value: 'New Todo' } });
+    fireEvent.click(addButton);
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        'http://localhost:3000/',
+        expect.objectContaining({
+          method: 'POST',
+          body: JSON.stringify({ title: 'New Todo' })
+        })
+      );
     });
 
-    // Soumettre
-    fireEvent.click(screen.getByRole("button", { name: /ajouter la tâche/i }));
+    // The input should be cleared after adding
+    expect(input).toHaveValue('');
+  });
 
-    // arrêter l'exécution pour attendre que les effets de la soumission soient appliqués
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Vérifie que le todo a été ajouté à l'écran
-    // await waitFor(() => {
-    //   expect(screen.getByText("Nouvelle tâche")).toBeInTheDocument();
-    // });
-
-    // Vérifie que fetch a été appelé avec les bons arguments
-    expect(fetch).toHaveBeenCalledTimes(2);
-    expect(fetch).toHaveBeenNthCalledWith(2, `${process.env.REACT_APP_REQUEST_BASE}/`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json;charset=UTF-8",
-      },
-      body: JSON.stringify({ title: "Nouvelle tâche" }),
+  it('handles toggle todo', async () => {
+    // First call: GET todos
+    const mockTodos = [{ id: '1', title: 'Test Todo' }];
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockTodos
     });
+
+    await act(async () => {
+      render(<HomePage />);
+    });
+
+    // The checkbox should be present
+    const checkbox = await screen.findByRole('checkbox');
+    expect(checkbox).not.toBeChecked();
+    fireEvent.click(checkbox);
+    expect(checkbox).toBeChecked();
+    fireEvent.click(checkbox);
+    expect(checkbox).not.toBeChecked();
+  });
+
+  it('handles fetch error when loading todos', async () => {
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+    (global.fetch as jest.Mock).mockRejectedValueOnce(new Error('Network error'));
+
+    await act(async () => {
+      render(<HomePage />);
+    });
+
+    await waitFor(() => {
+      expect(consoleSpy).toHaveBeenCalledWith(
+        'Erreur lors du chargement des todos :',
+        expect.any(Error)
+      );
+    });
+
+    consoleSpy.mockRestore();
+  });
+
+  it('handles fetch error when adding todo', async () => {
+    // First call: GET todos (empty)
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: true,
+      json: async () => []
+    });
+    // Second call: POST fails
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+    (global.fetch as jest.Mock).mockRejectedValueOnce(new Error('Network error'));
+
+    render(<HomePage />);
+
+    const input = screen.getByPlaceholderText('Entrez le titre de la tâche...');
+    const addButton = screen.getByRole('button', { name: /ajouter la tâche/i });
+
+    fireEvent.change(input, { target: { value: 'New Todo' } });
+    fireEvent.click(addButton);
+
+    await waitFor(() => {
+      expect(consoleSpy).toHaveBeenCalledWith(
+        "Erreur lors de l'ajout du todo :",
+        expect.any(Error)
+      );
+    });
+
+    consoleSpy.mockRestore();
+  });
+
+  it('handles non-OK response when adding todo', async () => {
+    // First call: GET todos (empty)
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: true,
+      json: async () => []
+    });
+    // Second call: POST returns non-OK response
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: false,
+      status: 400
+    });
+
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+
+    render(<HomePage />);
+
+    const input = screen.getByPlaceholderText('Entrez le titre de la tâche...');
+    const addButton = screen.getByRole('button', { name: /ajouter la tâche/i });
+
+    fireEvent.change(input, { target: { value: 'New Todo' } });
+    fireEvent.click(addButton);
+
+    await waitFor(() => {
+      expect(consoleSpy).toHaveBeenCalledWith(
+        'Erreur lors de l\'ajout du todo :',
+        expect.any(Error)
+      );
+    });
+
+    // Verify the todo was not added to the list
+    expect(screen.queryByText('New Todo')).not.toBeInTheDocument();
+
+    consoleSpy.mockRestore();
+  });
+
+  it('should throw error when response is not ok during todo addition', async () => {
+    // Mock initial GET request
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: true,
+      json: async () => []
+    });
+
+    // Mock POST request with non-OK response
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: false,
+      status: 500
+    });
+
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+
+    render(<HomePage />);
+
+    // Add a new todo
+    const input = screen.getByPlaceholderText('Entrez le titre de la tâche...');
+    const addButton = screen.getByRole('button', { name: /ajouter la tâche/i });
+
+    fireEvent.change(input, { target: { value: 'Test Todo' } });
+    fireEvent.click(addButton);
+
+    // Verify error handling
+    await waitFor(() => {
+      expect(consoleSpy).toHaveBeenCalledWith(
+        'Erreur lors de l\'ajout du todo :',
+        expect.any(Error)
+      );
+    });
+
+    // Verify the error message contains the status code
+    expect(consoleSpy.mock.calls[0][1].message).toContain('HTTP error! status: 500');
+
+    consoleSpy.mockRestore();
   });
 });
