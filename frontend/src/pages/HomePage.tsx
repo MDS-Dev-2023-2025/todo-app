@@ -9,9 +9,6 @@ const HomePage = () => {
   const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
 
   const handleAddTodo = (title: string) => {
-    const newId = (todos.length + 1).toString();
-    const newTodo = new RawTodoItem(newId, title);
-    setTodos([...todos, newTodo]);
     fetch(`${process.env.REACT_APP_REQUEST_BASE}/`, {
       method: "POST",
       headers: {
@@ -20,6 +17,15 @@ const HomePage = () => {
       body: JSON.stringify({
         title
       }),
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const newId = (todos.length + 1).toString();
+      const newTodo = new RawTodoItem(newId, title);
+      setTodos([...todos, newTodo]);
+    }).catch((error) => {
+      console.error("Erreur lors de l'ajout du todo :", error);
     });
   };
 
@@ -58,8 +64,19 @@ const HomePage = () => {
     ));
   };
 
-  const handleDeleteTodo = (id: string) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+  const handleDeleteTodo = async (id: string) => {
+    try {
+        await fetch(`${process.env.REACT_APP_REQUEST_BASE}/`+id, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+        }).then(() => setTodos(todos.filter(todo => todo.id !== id))).catch((error) => {
+          console.error("Erreur lors de la suppression du todo :", error);
+        });
+      } catch (error) {
+        console.error("Erreur lors du chargement des todos :", error);
+      }
   };
 
   const filteredTodos = todos.filter(todo => {
