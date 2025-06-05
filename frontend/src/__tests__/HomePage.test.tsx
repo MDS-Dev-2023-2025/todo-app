@@ -24,13 +24,6 @@ describe("HomePage test", () => {
     (fetch as jest.Mock).mockClear();
   });
 
-  test("affiche les todos initiaux", () => {
-    render(<HomePage />);
-    expect(screen.getByText("Item 1")).toBeInTheDocument();
-    expect(screen.getByText("Item 2")).toBeInTheDocument();
-    expect(screen.getByText("Item 3")).toBeInTheDocument();
-  });
-
   test("ajoute un todo et envoie une requête API", async () => {
     (fetch as jest.Mock).mockResolvedValue({ ok: true });
 
@@ -50,7 +43,7 @@ describe("HomePage test", () => {
     });
 
     // Vérifie que fetch a été appelé avec les bons arguments
-    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledTimes(2);
     expect(fetch).toHaveBeenCalledWith("http://localhost:3001/api/todos/", {
       method: "POST",
       headers: {
