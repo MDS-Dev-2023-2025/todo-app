@@ -1,5 +1,5 @@
-import request from "supertest";
 import express from "express";
+import request from "supertest";
 import todoRoutes from "../../routes/todo.routes";
 
 // Set up Express app with the todo routes
@@ -55,5 +55,11 @@ describe("Todo Routes", () => {
     const res = await request(app).delete("/todos/nonexistent");
     expect(res.status).toBe(400);
     expect(res.body.message).toMatch(/error/i);
+  });
+
+  // Test for deleting all todos
+  it("DELETE /todos - should delete all todos", async () => {
+    const res = await request(app).delete("/todos");
+    expect(res.status).toBe(204);
   });
 });
