@@ -10,7 +10,7 @@ const HomePage = () => {
     new RawTodoItem("2", "Item 2", "Description item 2"),
     new RawTodoItem("3", "Item 3", "Description item 3"),
   ]);
-  const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
+  const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
 
   const handleAddTodo = (title: string, description: string) => {
     const newId = (todos.length + 1).toString();
@@ -19,18 +19,20 @@ const HomePage = () => {
   };
 
   const handleToggleTodo = (id: string) => {
-    setTodos(todos.map(todo => 
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    );
   };
 
   const handleDeleteTodo = (id: string) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const filteredTodos = todos.filter(todo => {
-    if (filter === 'active') return !todo.completed;
-    if (filter === 'completed') return todo.completed;
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "active") return !todo.completed;
+    if (filter === "completed") return todo.completed;
     return true;
   });
 
@@ -38,33 +40,33 @@ const HomePage = () => {
     <main className={styles.container}>
       <h1 className={styles.title}>Todo App</h1>
       <TodoForm onAddTodo={handleAddTodo} />
-      
+
       <div className={styles.filterContainer}>
-        <button 
+        <button
           data-cy="filter-all"
-          className={filter === 'all' ? styles.activeFilter : ''}
-          onClick={() => setFilter('all')}
+          className={filter === "all" ? styles.activeFilter : ""}
+          onClick={() => setFilter("all")}
         >
           Toutes
         </button>
-        <button 
+        <button
           data-cy="filter-active"
-          className={filter === 'active' ? styles.activeFilter : ''}
-          onClick={() => setFilter('active')}
+          className={filter === "active" ? styles.activeFilter : ""}
+          onClick={() => setFilter("active")}
         >
           Actives
         </button>
-        <button 
+        <button
           data-cy="filter-completed"
-          className={filter === 'completed' ? styles.activeFilter : ''}
-          onClick={() => setFilter('completed')}
+          className={filter === "completed" ? styles.activeFilter : ""}
+          onClick={() => setFilter("completed")}
         >
           Terminées
         </button>
       </div>
 
-      <TodoList 
-        todos={filteredTodos} 
+      <TodoList
+        todos={filteredTodos}
         onToggleTodo={handleToggleTodo}
         onDeleteTodo={handleDeleteTodo}
       />

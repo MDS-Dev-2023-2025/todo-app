@@ -16,8 +16,8 @@ const TodoList = ({ todos, onToggleTodo, onDeleteTodo }: Props) => {
         <p data-cy="empty-state">Aucune tâche pour le moment</p>
       ) : (
         todos.map((todo) => (
-          <TodoItem 
-            key={todo.id} 
+          <TodoItem
+            key={todo.id}
             todo={todo}
             onToggle={() => onToggleTodo(todo.id)}
             onDelete={() => onDeleteTodo(todo.id)}

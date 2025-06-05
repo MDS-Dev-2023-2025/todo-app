@@ -7,7 +7,12 @@
       "Bash(mkdir:*)",
       "Bash(chmod:*)",
       "Bash(rm:*)",
-      "Bash(touch:*)"
+      "Bash(touch:*)",
+      "Bash(ls:*)",
+      "Bash(./scripts/ci-pipeline.sh:*)",
+      "Bash(npx prettier:*)",
+      "Bash(npm audit fix:*)",
+      "Bash(npm run lint)"
     ],
     "deny": []
   }

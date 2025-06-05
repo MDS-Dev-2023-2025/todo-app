@@ -11,14 +11,17 @@ type Props = {
 const TodoItem = ({ todo, onToggle, onDelete }: Props) => {
   return (
     <section className={styles.container} data-cy="todo-item">
-      <input 
-        type="checkbox" 
+      <input
+        type="checkbox"
         data-cy="todo-checkbox"
         checked={todo.completed}
         onChange={onToggle}
       />
       <div className={styles.content}>
-        <p className={`${styles.title} ${todo.completed ? styles.completed : ''}`} data-cy="todo-title">
+        <p
+          className={`${styles.title} ${todo.completed ? styles.completed : ""}`}
+          data-cy="todo-title"
+        >
           {todo.title}
         </p>
         {todo.description && (
@@ -27,7 +30,7 @@ const TodoItem = ({ todo, onToggle, onDelete }: Props) => {
           </p>
         )}
       </div>
-      <button 
+      <button
         className={styles.deleteButton}
         data-cy="delete-todo-button"
         onClick={onDelete}

@@ -19,7 +19,7 @@ export default [
     },
     rules: {
       "react/react-in-jsx-scope": "off", // Pas besoin d'importer React avec React 17+
-      "react/jsx-uses-react": "off",     // Pas besoin d'importer React avec React 17+
+      "react/jsx-uses-react": "off", // Pas besoin d'importer React avec React 17+
     },
   },
 ];

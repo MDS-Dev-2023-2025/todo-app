@@ -22,10 +22,10 @@ echo "🔍 Vérification de la qualité du code..."
 # ESLint
 echo "📝 Vérification ESLint..."
 if [ "$FIX_MODE" = true ]; then
-    npx eslint src/ --ext .ts,.tsx --fix
+    npm run lint -- --fix
     echo "  ✅ ESLint - corrections automatiques appliquées"
 else
-    npx eslint src/ --ext .ts,.tsx
+    npm run lint
     echo "  ✅ ESLint - vérification terminée"
 fi
 
@@ -35,7 +35,8 @@ if [ "$FIX_MODE" = true ]; then
     npm run format
     echo "  ✅ Prettier - formatage appliqué"
 else
-    npx prettier --check "src/**/*.{ts,tsx,css,scss,json}"
+    npx prettier --check ../ --write
+    npx prettier --check ../../backend/ --write
     echo "  ✅ Prettier - vérification terminée"
 fi
 

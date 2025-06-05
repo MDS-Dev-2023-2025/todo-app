@@ -29,7 +29,7 @@ case $MODE in
         ;;
     "ci"|"headless")
         echo "🤖 Exécution des tests en mode headless..."
-        npm run cypress:run
+        npm run e2e
         ;;
     "run"|*)
         echo "🧪 Exécution des tests E2E avec serveur automatique..."

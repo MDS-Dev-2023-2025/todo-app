@@ -34,7 +34,7 @@ describe("TodoService", () => {
 
   it("devrait lancer une erreur si le todo est introuvable à la suppression", async () => {
     await expect(service.deleteTodo("inexistant")).rejects.toThrow(
-      "Todo not found"
+      "Todo not found",
     );
   });
 });
