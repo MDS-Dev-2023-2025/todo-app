@@ -48,7 +48,7 @@ describe("HomePage test", () => {
 
     // Vérifie que fetch a été appelé avec les bons arguments
     expect(fetch).toHaveBeenCalledTimes(2);
-    expect(fetch).toHaveBeenCalledWith("http://localhost:3001/api/todos/", {
+    expect(fetch).toHaveBeenNthCalledWith(2, "http://localhost:3001/todos/", {
       method: "POST",
       headers: {
         "content-type": "application/json;charset=UTF-8",
