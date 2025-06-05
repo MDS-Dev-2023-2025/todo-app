@@ -1,6 +1,6 @@
 import request from "supertest";
 import express from "express";
-import todoRoutes from "../../src/routes/todo.routes";
+import todoRoutes from "../../routes/todo.routes";
 
 // Set up Express app with the todo routes
 const app = express();

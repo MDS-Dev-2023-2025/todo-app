@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TodoController = void 0;
 const todo_service_1 = require("../services/todo.service");
 class TodoController {
-    constructor() {
+    constructor(todoService = new todo_service_1.TodoService()) {
         this.getAllTodos = async (req, res) => {
             try {
                 const todos = await this.todoService.getAllTodos();
@@ -49,7 +49,7 @@ class TodoController {
                 res.status(500).json({ message: "Error deleting all todos" });
             }
         };
-        this.todoService = new todo_service_1.TodoService();
+        this.todoService = todoService;
     }
 }
 exports.TodoController = TodoController;
