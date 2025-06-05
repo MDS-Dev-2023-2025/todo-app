@@ -42,6 +42,10 @@ jobs:
       working-directory: ./frontend
       run: npx tsc --noEmit
 
+    - name: Run Jest tests
+      working-directory: ./frontend
+      run: npm test -- --coverage --watchAll=false
+
 
   # Job pour les tests E2E
   e2e-tests:
