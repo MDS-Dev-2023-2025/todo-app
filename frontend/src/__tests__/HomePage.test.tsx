@@ -24,7 +24,12 @@ describe("HomePage test", () => {
   });
 
   test("ajoute un todo et envoie une requête API", async () => {
-    (fetch as jest.Mock).mockResolvedValue({ ok: true });
+    (fetch as jest.Mock)
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => [],
+      })
+      .mockResolvedValueOnce({ ok: true });
 
     render(<HomePage />);
 

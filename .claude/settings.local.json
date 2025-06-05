@@ -7,8 +7,13 @@
       "Bash(mkdir:*)",
       "Bash(chmod:*)",
       "Bash(rm:*)",
-      "Bash(touch:*)"
+      "Bash(touch:*)",
+      "Bash(npm test:*)",
+      "Bash(ls:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm run cypress:run:*)"
     ],
     "deny": []
-  }
+  },
+  "enableAllProjectMcpServers": false
 }

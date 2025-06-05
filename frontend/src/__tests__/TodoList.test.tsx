@@ -8,12 +8,15 @@ import RawTodoItem from "../models/RawTodoItem";
 describe("TodoList component test", () => {
   test("affiche tous les todos passés en props", () => {
     const exempleTodos: RawTodoItem[] = [
-      { id: "1", title: "title1" },
-      { id: "2", title: "title2" },
-      { id: "3", title: "title3" },
+      new RawTodoItem("1", "title1"),
+      new RawTodoItem("2", "title2"),
+      new RawTodoItem("3", "title3"),
     ];
 
-    render(<TodoList todos={exempleTodos} />);
+    const mockOnToggle = jest.fn();
+    const mockOnDelete = jest.fn();
+
+    render(<TodoList todos={exempleTodos} onToggleTodo={mockOnToggle} onDeleteTodo={mockOnDelete} />);
 
     // Vérifier que chaque titre est affiché
     exempleTodos.forEach((todo) => {
@@ -22,6 +25,11 @@ describe("TodoList component test", () => {
   });
 
   test("n'affiche rien si la liste est vide", () => {
-    render(<TodoList todos={[]} />);
+    const mockOnToggle = jest.fn();
+    const mockOnDelete = jest.fn();
+
+    render(<TodoList todos={[]} onToggleTodo={mockOnToggle} onDeleteTodo={mockOnDelete} />);
+    
+    expect(screen.getByText("Aucune tâche pour le moment")).toBeInTheDocument();
   });
 });
