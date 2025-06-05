@@ -2,15 +2,23 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import HomePage from "../pages/HomePage";
 import * as React from "react";
 
+// Mock du modèle RawTodoItem
+// Pour éviter les dépendances externes, nous mockons le modèle RawTodoItem
+// Le mock permet de simuler le comportement du modèle sans avoir besoin de la base de données ou d'une API réelle
 jest.mock("../models/RawTodoItem", () => {
-  return function MockedRawTodoItem(id: string, title: string, description: string) {
-    return { id, title, description };
+  return function MockedRawTodoItem(id: string, title: string) {
+    return { id, title};
   };
 });
 
 // Mock global de fetch
+// Nous mockons la fonction fetch pour simuler les appels API
+// Cela permet de tester les interactions avec l'API sans effectuer de requêtes réelles
 global.fetch = jest.fn();
 
+// deux tests unitaires pour la page HomePage
+// 1. Vérifier que les todos initiaux sont affichés
+// 2. Vérifier que l'ajout d'un todo envoie une requête API et met à jour l'affichage
 describe("HomePage test", () => {
   beforeEach(() => {
     (fetch as jest.Mock).mockClear();
@@ -31,10 +39,6 @@ describe("HomePage test", () => {
     // Remplir les champs
     fireEvent.change(screen.getByPlaceholderText(/titre/i), {
       target: { value: "Nouvelle tâche" },
-    });
-
-    fireEvent.change(screen.getByPlaceholderText(/description/i), {
-      target: { value: "Description test" },
     });
 
     // Soumettre
