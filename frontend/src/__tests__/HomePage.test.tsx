@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import HomePage from "../pages/HomePage";
-import { data } from "react-router-dom";
+import { stat } from "fs";
 
 // Mock du modèle RawTodoItem
 // Pour éviter les dépendances externes, nous mockons le modèle RawTodoItem
@@ -28,7 +28,8 @@ describe("HomePage test", () => {
     (fetch as jest.Mock)
       .mockResolvedValueOnce({
       ok: true,
-      json: async () => Promise.resolve({ data: 'Nouvelle tâche' }),
+      json: async () => [],
+      status: 204,
       })
       .mockResolvedValueOnce({ ok: false });
     

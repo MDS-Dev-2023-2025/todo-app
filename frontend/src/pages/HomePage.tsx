@@ -7,12 +7,6 @@ import RawTodoItem from "../models/RawTodoItem";
 const HomePage = () => {
   const [todos, setTodos] =useState<RawTodoItem[]>([]);
   const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
-  
-  const addTodoFrontSide = (title: string) => {
-    const newId = (todos.length + 1).toString();
-    const newTodo = new RawTodoItem(newId, title);
-    setTodos([...todos, newTodo]);
-  };
 
   const handleAddTodo = (title: string) => {
     fetch(`${process.env.REACT_APP_REQUEST_BASE}/`, {
@@ -27,7 +21,9 @@ const HomePage = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      addTodoFrontSide(title);
+      const newId = (todos.length + 1).toString();
+      const newTodo = new RawTodoItem(newId, title);
+      setTodos([...todos, newTodo]);
     }).catch((error) => {
       console.error("Erreur lors de l'ajout du todo :", error);
     });
