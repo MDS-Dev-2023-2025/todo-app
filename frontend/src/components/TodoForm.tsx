@@ -26,6 +26,7 @@ const TodoForm = ({ onAddTodo }: Props) => {
           </label>
           <input
             id="todo-title"
+            data-cy="todo-title-input"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -37,6 +38,7 @@ const TodoForm = ({ onAddTodo }: Props) => {
 
         <button
           type="submit"
+          data-cy="submit-todo-button"
           className={styles.submitButton}
           disabled={!title.trim()}
         >
