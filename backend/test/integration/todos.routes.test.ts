@@ -1,6 +1,6 @@
+import { describe, expect, it } from "@jest/globals";
 import request from "supertest";
 import app from "../../src/app";
-import { describe, it, expect } from "@jest/globals";
 
 describe("Todo Routes", () => {
   let createdTodoId: string;
@@ -10,7 +10,7 @@ describe("Todo Routes", () => {
       .post("/todos")
       .send({ title: "Test route" });
     expect(response.statusCode).toBe(201);
-    expect(response.body.title).toBe("Test route");
+    expect(response.body.title).toMatchInlineSnapshot(`"Test route"`);
     createdTodoId = response.body.id;
   });
 
@@ -25,7 +25,7 @@ describe("Todo Routes", () => {
       .put(`/todos/${createdTodoId}`)
       .send({ completed: true });
     expect(response.statusCode).toBe(200);
-    expect(response.body.completed).toBe(true);
+    expect(response.body.completed).toMatchInlineSnapshot(`true`);
   });
 
   it("DELETE /todos/:id - deletes a todo", async () => {

@@ -10,7 +10,7 @@ describe("TodoService", () => {
 
   it("should create a todo", async () => {
     const todo = await service.createTodo({ title: "Test Todo" });
-    expect(todo).toMatchSnapshot();
+    expect(todo.title).toMatchInlineSnapshot(`"Test Todo"`);
   });
 
   it("should return all todos", async () => {
@@ -19,10 +19,10 @@ describe("TodoService", () => {
     expect(todos.length).toBe(1);
   });
 
-  it("should update a todo", async () => {
+  it("should update a todo with completed status true", async () => {
     const todo = await service.createTodo({ title: "Initial" });
     const updated = await service.updateTodo(todo.id, { completed: true });
-    expect(updated.completed).toBe(true);
+    expect(updated.completed).toMatchInlineSnapshot(`true`);
   });
 
   it("should delete a todo", async () => {

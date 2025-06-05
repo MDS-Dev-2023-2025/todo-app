@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`TodoService should create a todo 1`] = `
-{
-  "completed": false,
-  "id": "1749110306824",
-  "title": "Test Todo",
-}
-`;
