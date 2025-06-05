@@ -1,11 +1,11 @@
-import { describe, expect, it } from "@jest/globals";
 import request from "supertest";
 import app from "../../src/app";
+import { describe, it, expect } from "@jest/globals";
 
 describe("Todo Routes", () => {
   let createdTodoId: string;
 
-  it("POST /todos - crée un todo", async () => {
+  it("POST /todos - creates a todo", async () => {
     const response = await request(app)
       .post("/todos")
       .send({ title: "Test route" });
@@ -14,13 +14,13 @@ describe("Todo Routes", () => {
     createdTodoId = response.body.id;
   });
 
-  it("GET /todos - récupère tous les todos", async () => {
+  it("GET /todos - retrieves all todos", async () => {
     const response = await request(app).get("/todos");
     expect(response.statusCode).toBe(200);
     expect(Array.isArray(response.body)).toBe(true);
   });
 
-  it("PUT /todos/:id - met à jour un todo", async () => {
+  it("PUT /todos/:id - updates a todo", async () => {
     const response = await request(app)
       .put(`/todos/${createdTodoId}`)
       .send({ completed: true });
@@ -28,12 +28,12 @@ describe("Todo Routes", () => {
     expect(response.body.completed).toBe(true);
   });
 
-  it("DELETE /todos/:id - supprime un todo", async () => {
+  it("DELETE /todos/:id - deletes a todo", async () => {
     const response = await request(app).delete(`/todos/${createdTodoId}`);
     expect(response.statusCode).toBe(204);
   });
 
-  it("DELETE /todos/:id - todo inexistant", async () => {
+  it("DELETE /todos/:id - todo not found", async () => {
     const response = await request(app).delete("/todos/123");
     expect(response.statusCode).toBe(400);
   });
