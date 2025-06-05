@@ -43,4 +43,13 @@ export class TodoController {
       res.status(400).json({ message: "Error deleting todo" });
     }
   };
+
+  deleteAllTodos = async (req: Request, res: Response) => {
+    try {
+      await this.todoService.deleteAllTodos();
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ message: "Error deleting all todos" });
+    }
+  };
 } 

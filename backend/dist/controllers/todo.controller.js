@@ -40,6 +40,15 @@ class TodoController {
                 res.status(400).json({ message: "Error deleting todo" });
             }
         };
+        this.deleteAllTodos = async (req, res) => {
+            try {
+                await this.todoService.deleteAllTodos();
+                res.status(204).send();
+            }
+            catch (error) {
+                res.status(500).json({ message: "Error deleting all todos" });
+            }
+        };
         this.todoService = new todo_service_1.TodoService();
     }
 }

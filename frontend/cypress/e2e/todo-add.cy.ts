@@ -1,5 +1,6 @@
 describe('Todo App - Add Todo', () => {
   beforeEach(() => {
+    cy.clearAllTodos()
     cy.visit('/')
   })
 

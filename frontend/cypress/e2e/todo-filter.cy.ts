@@ -1,5 +1,6 @@
 describe('Todo App - Filter Todos', () => {
   beforeEach(() => {
+    cy.clearAllTodos()
     cy.visit('/')
     
     // Setup test data

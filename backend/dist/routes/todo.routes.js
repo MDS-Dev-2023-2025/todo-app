@@ -62,6 +62,16 @@ router.post("/", todoController.createTodo);
 router.put("/:id", todoController.updateTodo);
 /**
  * @openapi
+ * /todos:
+ *   delete:
+ *     summary: Supprime toutes les tâches (pour les tests)
+ *     responses:
+ *       204:
+ *         description: Toutes les tâches supprimées avec succès
+ */
+router.delete("/", todoController.deleteAllTodos);
+/**
+ * @openapi
  * /todos/{id}:
  *   delete:
  *     summary: Supprime une tâche existante

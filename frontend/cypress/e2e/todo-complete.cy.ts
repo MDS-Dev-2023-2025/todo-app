@@ -1,5 +1,6 @@
 describe('Todo App - Complete Todo', () => {
   beforeEach(() => {
+    cy.clearAllTodos()
     cy.visit('/')
     cy.addTodo('Première tâche')
     cy.addTodo('Deuxième tâche')

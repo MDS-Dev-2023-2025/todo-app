@@ -32,5 +32,8 @@ class TodoService {
         }
         this.todos.splice(todoIndex, 1);
     }
+    async deleteAllTodos() {
+        this.todos = [];
+    }
 }
 exports.TodoService = TodoService;

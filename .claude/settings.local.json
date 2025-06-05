@@ -19,7 +19,8 @@
       "Bash(npm run build:*)",
       "Bash(npx react-scripts:*)",
       "Bash(npm run lint)",
-      "Bash(npm audit:*)"
+      "Bash(npm audit:*)",
+      "Bash(kill:*)"
     ],
     "deny": []
   },

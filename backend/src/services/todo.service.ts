@@ -33,4 +33,8 @@ export class TodoService {
     }
     this.todos.splice(todoIndex, 1);
   }
+
+  async deleteAllTodos(): Promise<void> {
+    this.todos = [];
+  }
 }
