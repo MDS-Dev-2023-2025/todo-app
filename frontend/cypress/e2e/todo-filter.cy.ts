@@ -1,8 +1,14 @@
 describe('Todo App - Filter Todos', () => {
   beforeEach(() => {
+    cy.clearAllTodos()
     cy.visit('/')
     
-    // Setup test data: mark some todos as completed
+    // Setup test data
+    cy.addTodo('Première tâche')
+    cy.addTodo('Deuxième tâche')
+    cy.addTodo('Troisième tâche')
+    
+    // Mark first todo as completed
     cy.get('[data-cy=todo-item]').first().within(() => {
       cy.get('[data-cy=todo-checkbox]').check()
     })
@@ -15,7 +21,7 @@ describe('Todo App - Filter Todos', () => {
       const classList = $el[0].className
       expect(classList).to.include('activeFilter')
     })
-    cy.get('[data-cy=todo-item]').should('have.length', 4) // 3 initial + 1 new
+    cy.get('[data-cy=todo-item]').should('have.length', 4) // 4 todos total
   })
 
   it('should filter to show only active todos', () => {
@@ -25,7 +31,7 @@ describe('Todo App - Filter Todos', () => {
       const classList = $el[0].className
       expect(classList).to.include('activeFilter')
     })
-    cy.get('[data-cy=todo-item]').should('have.length', 3) // 2 initial active + 1 new
+    cy.get('[data-cy=todo-item]').should('have.length', 3) // 3 active todos
     
     cy.get('[data-cy=todo-item]').each(($el) => {
       cy.wrap($el).within(() => {

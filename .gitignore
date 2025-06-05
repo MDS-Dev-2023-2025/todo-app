@@ -16,3 +16,4 @@ yarn-error.log*
 frontend/node_modules/
 
 backend/coverage/
+backend/dist/

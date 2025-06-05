@@ -7,8 +7,22 @@
       "Bash(mkdir:*)",
       "Bash(chmod:*)",
       "Bash(rm:*)",
-      "Bash(touch:*)"
+      "Bash(touch:*)",
+      "Bash(npm test:*)",
+      "Bash(ls:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm run cypress:run:*)",
+      "Bash(curl:*)",
+      "Bash(./scripts/ci-pipeline.sh:*)",
+      "Bash(npm run start:ci:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx react-scripts:*)",
+      "Bash(npm run lint)",
+      "Bash(npm audit:*)",
+      "Bash(kill:*)"
     ],
     "deny": []
-  }
+  },
+  "enableAllProjectMcpServers": false
 }
