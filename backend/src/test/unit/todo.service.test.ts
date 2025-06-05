@@ -54,4 +54,23 @@ describe("TodoService", () => {
       "Todo not found"
     );
   });
+
+  // Test for deleting all todos
+  it("should delete all todos", async () => {
+    await service.createTodo({ title: "First" });
+    await service.createTodo({ title: "Second" });
+    let todos = await service.getAllTodos();
+    expect(todos).toHaveLength(2);
+
+    await service.deleteAllTodos();
+    todos = await service.getAllTodos();
+    expect(todos).toHaveLength(0);
+  });
+
+  // Test that deleteAllTodos does not throw when todos are already empty
+  it("should not throw when deleting all todos from an empty list", async () => {
+    await expect(service.deleteAllTodos()).resolves.not.toThrow();
+    const todos = await service.getAllTodos();
+    expect(todos).toEqual([]);
+  });
 });
