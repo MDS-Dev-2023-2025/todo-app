@@ -1,30 +1,31 @@
 describe('Todo App - Delete Todo', () => {
   beforeEach(() => {
+    cy.clearAllTodos()
     cy.visit('/')
+    cy.addTodo('Première tâche')
+    cy.addTodo('Deuxième tâche')
+    cy.addTodo('Troisième tâche')
   })
 
   it('should delete a todo', () => {
     cy.get('[data-cy=todo-item]').should('have.length', 3)
     
-    // Supprimer le premier élément (Item 1)
+    // Supprimer le premier élément
     cy.get('[data-cy=todo-item]').first().find('[data-cy=delete-todo-button]').click()
 
     // Attendre que React re-rende
     cy.get('[data-cy=todo-item]').should('have.length', 2)
     
-    // Vérifier que "Item 1" a été supprimé
-    cy.get('[data-cy=todo-list]').should('not.contain', 'Item 1')
+    // Vérifier que "Première tâche" a été supprimée
+    cy.get('[data-cy=todo-list]').should('not.contain', 'Première tâche')
     
     // Vérifier que les autres restent
-    cy.get('[data-cy=todo-list]').should('contain', 'Item 2')
-    cy.get('[data-cy=todo-list]').should('contain', 'Item 3')
+    cy.get('[data-cy=todo-list]').should('contain', 'Deuxième tâche')
+    cy.get('[data-cy=todo-list]').should('contain', 'Troisième tâche')
   })
 
   it('should delete the correct todo when multiple exist', () => {
     cy.get('[data-cy=todo-item]').should('have.length', 3)
-    
-    // Capturer le titre du todo qu'on va supprimer (deuxième élément = "Item 2")
-    cy.get('[data-cy=todo-item]').eq(1).find('[data-cy=todo-title]').invoke('text').as('todoToDelete')
     
     // Supprimer le deuxième élément
     cy.get('[data-cy=todo-item]').eq(1).find('[data-cy=delete-todo-button]').click()
@@ -32,12 +33,12 @@ describe('Todo App - Delete Todo', () => {
     // Attendre que React re-rende et vérifier le nombre d'éléments
     cy.get('[data-cy=todo-item]').should('have.length', 2)
     
-    // Vérifier que "Item 2" a été supprimé
-    cy.get('[data-cy=todo-list]').should('not.contain', 'Item 2')
+    // Vérifier que "Deuxième tâche" a été supprimée
+    cy.get('[data-cy=todo-list]').should('not.contain', 'Deuxième tâche')
     
     // Vérifier que les autres restent
-    cy.get('[data-cy=todo-list]').should('contain', 'Item 1')
-    cy.get('[data-cy=todo-list]').should('contain', 'Item 3')
+    cy.get('[data-cy=todo-list]').should('contain', 'Première tâche')
+    cy.get('[data-cy=todo-list]').should('contain', 'Troisième tâche')
   })
 
   it('should delete completed todos', () => {
@@ -50,11 +51,10 @@ describe('Todo App - Delete Todo', () => {
   })
 
   it('should show empty state when all todos are deleted', () => {
-    cy.get('[data-cy=todo-item]').each(($el) => {
-      cy.wrap($el).within(() => {
-        cy.get('[data-cy=delete-todo-button]').click()
-      })
-    })
+    // Supprimer tous les todos un par un
+    cy.get('[data-cy=todo-item]').first().find('[data-cy=delete-todo-button]').click()
+    cy.get('[data-cy=todo-item]').first().find('[data-cy=delete-todo-button]').click()
+    cy.get('[data-cy=todo-item]').first().find('[data-cy=delete-todo-button]').click()
 
     cy.get('[data-cy=empty-state]').should('be.visible')
     cy.get('[data-cy=empty-state]').should('contain', 'Aucune tâche pour le moment')
@@ -66,7 +66,7 @@ describe('Todo App - Delete Todo', () => {
     })
 
     cy.get('[data-cy=todo-item]').should('have.length', 2)
-    cy.get('[data-cy=todo-item]').first().should('contain', 'Item 2')
-    cy.get('[data-cy=todo-item]').last().should('contain', 'Item 3')
+    cy.get('[data-cy=todo-item]').first().should('contain', 'Deuxième tâche')
+    cy.get('[data-cy=todo-item]').last().should('contain', 'Troisième tâche')
   })
 })

@@ -10,7 +10,7 @@ module.exports = {
     },
 
     coveragePathIgnorePatterns: [
-        "/node_modules/",
+        "<rootDir>/node_modules/",
         "/coverage",
         "package.json",
         "package-lock.json",
@@ -18,5 +18,14 @@ module.exports = {
         "setupTests.ts",
         "index.tsx"
     ],
-    setupFilesAfterEnv: ['frontend/jest.setup.ts'],
+    setupFilesAfterEnv: ['jest.setup.ts'],
+
+    moduleDirectories: ["node_modules", "src", "<rootDir>"],
+
+    globals: {
+        'ts-jest': {
+            tsconfig: 'tsconfig.json',
+        },
+    },
+
 };

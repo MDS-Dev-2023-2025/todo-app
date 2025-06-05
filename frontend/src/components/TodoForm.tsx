@@ -2,19 +2,17 @@ import React, { useState } from "react";
 import styles from "../styles/components/TodoForm.module.scss";
 
 type Props = {
-  onAddTodo: (title: string, description: string) => void;
+  onAddTodo: (title: string) => void;
 };
 
 const TodoForm = ({ onAddTodo }: Props) => {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (title.trim()) {
-      onAddTodo(title.trim(), description.trim());
+      onAddTodo(title.trim());
       setTitle("");
-      setDescription("");
     }
   };
 
@@ -35,21 +33,6 @@ const TodoForm = ({ onAddTodo }: Props) => {
             placeholder="Entrez le titre de la tâche..."
             className={styles.input}
             required
-          />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label htmlFor="todo-description" className={styles.label}>
-            Description
-          </label>
-          <textarea
-            id="todo-description"
-            data-cy="todo-description-input"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Ajoutez une description (optionnel)..."
-            className={styles.textarea}
-            rows={3}
           />
         </div>
 
