@@ -11,6 +11,11 @@ export class TodoController {
   getAllTodos = async (req: Request, res: Response) => {
     try {
       const todos = await this.todoService.getAllTodos();
+    mloiqlzr
+
+  getAllTodos = async (req: Request, res: Response) => {
+    try {
+      const todos = await this.todoService.getAllTodos();
       res.json(todos);
     } catch (error) {
       res.status(500).json({ message: 'Error fetching todos' });
