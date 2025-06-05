@@ -1,8 +1,9 @@
-import { Router } from "express";
-import { TodoController } from "../controllers/todo.controller";
-
-const router = Router();
-const todoController = new TodoController();
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const todo_controller_1 = require("../controllers/todo.controller");
+const router = (0, express_1.Router)();
+const todoController = new todo_controller_1.TodoController();
 /**
  * @openapi
  * /todos:
@@ -13,7 +14,6 @@ const todoController = new TodoController();
  *         description: Liste des todos
  */
 router.get("/", todoController.getAllTodos);
-
 /**
  * @openapi
  * /todos:
@@ -33,7 +33,6 @@ router.get("/", todoController.getAllTodos);
  *         description: Tâche créée avec succès
  */
 router.post("/", todoController.createTodo);
-
 /**
  * @openapi
  * /todos/{id}:
@@ -61,7 +60,6 @@ router.post("/", todoController.createTodo);
  *         description: Tâche mise à jour avec succès
  */
 router.put("/:id", todoController.updateTodo);
-
 /**
  * @openapi
  * /todos:
@@ -72,7 +70,6 @@ router.put("/:id", todoController.updateTodo);
  *         description: Toutes les tâches supprimées avec succès
  */
 router.delete("/", todoController.deleteAllTodos);
-
 /**
  * @openapi
  * /todos/{id}:
@@ -89,5 +86,4 @@ router.delete("/", todoController.deleteAllTodos);
  *         description: Tâche supprimée avec succès
  */
 router.delete("/:id", todoController.deleteTodo);
-
-export default router;
+exports.default = router;
