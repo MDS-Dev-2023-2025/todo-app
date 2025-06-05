@@ -2,10 +2,10 @@ import { Request, Response } from "express";
 import { TodoService } from "../services/todo.service";
 
 export class TodoController {
-  private todoService: TodoService;
+  private readonly todoService: TodoService;
 
-  constructor() {
-    this.todoService = new TodoService();
+  constructor(todoService: TodoService = new TodoService()) {
+    this.todoService = todoService;
   }
 
   getAllTodos = async (req: Request, res: Response) => {
@@ -43,7 +43,6 @@ export class TodoController {
       res.status(400).json({ message: "Error deleting todo" });
     }
   };
-
   deleteAllTodos = async (req: Request, res: Response) => {
     try {
       await this.todoService.deleteAllTodos();
