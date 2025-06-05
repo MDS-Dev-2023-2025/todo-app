@@ -18,17 +18,17 @@ class TodoService {
         return newTodo;
     }
     async updateTodo(id, todoData) {
-        const todoIndex = this.todos.findIndex(todo => todo.id === id);
+        const todoIndex = this.todos.findIndex((todo) => todo.id === id);
         if (todoIndex === -1) {
-            throw new Error('Todo not found');
+            throw new Error("Todo not found");
         }
         this.todos[todoIndex] = { ...this.todos[todoIndex], ...todoData };
         return this.todos[todoIndex];
     }
     async deleteTodo(id) {
-        const todoIndex = this.todos.findIndex(todo => todo.id === id);
+        const todoIndex = this.todos.findIndex((todo) => todo.id === id);
         if (todoIndex === -1) {
-            throw new Error('Todo not found');
+            throw new Error("Todo not found");
         }
         this.todos.splice(todoIndex, 1);
     }

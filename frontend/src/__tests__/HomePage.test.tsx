@@ -1,6 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import HomePage from "../pages/HomePage";
-import * as React from "react";
 
 // Mock du modèle RawTodoItem
 // Pour éviter les dépendances externes, nous mockons le modèle RawTodoItem

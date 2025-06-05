@@ -10,7 +10,7 @@ class TodoController {
                 res.json(todos);
             }
             catch (error) {
-                res.status(500).json({ message: 'Error fetching todos' });
+                res.status(500).json({ message: "Error fetching todos" });
             }
         };
         this.createTodo = async (req, res) => {
@@ -19,7 +19,7 @@ class TodoController {
                 res.status(201).json(todo);
             }
             catch (error) {
-                res.status(400).json({ message: 'Error creating todo' });
+                res.status(400).json({ message: "Error creating todo" });
             }
         };
         this.updateTodo = async (req, res) => {
@@ -28,7 +28,7 @@ class TodoController {
                 res.json(todo);
             }
             catch (error) {
-                res.status(400).json({ message: 'Error updating todo' });
+                res.status(400).json({ message: "Error updating todo" });
             }
         };
         this.deleteTodo = async (req, res) => {
@@ -37,7 +37,7 @@ class TodoController {
                 res.status(204).send();
             }
             catch (error) {
-                res.status(400).json({ message: 'Error deleting todo' });
+                res.status(400).json({ message: "Error deleting todo" });
             }
         };
         this.todoService = new todo_service_1.TodoService();
