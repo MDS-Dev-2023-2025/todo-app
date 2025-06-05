@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:best-iodine-cd0.notion.site)",
+      "Bash(npm install:*)",
+      "Bash(npx cypress:*)",
+      "Bash(mkdir:*)",
+      "Bash(chmod:*)",
+      "Bash(rm:*)",
+      "Bash(touch:*)"
+    ],
+    "deny": []
+  }
+}
